@@ -6,7 +6,7 @@ import java.util.List;
 
 import chatbot.component.DomainClassifier;
 import chatbot.component.WeatherIntentClassifier;
-//import chatbot.component.FoodIntentClassifier;
+import chatbot.component.FoodIntentClassifier;
 
 public class Chatbot {
 	
@@ -20,7 +20,7 @@ public class Chatbot {
 		
 		//each domain has one intent classifier 
 		private WeatherIntentClassifier weatherIntentClassifier;
-		//private FoodIntentClassifier foodIntentClassifier;
+		private FoodIntentClassifier foodIntentClassifier;
 	
 	//=====Code Added for Assignment 3 (Language Understanding) Ends=====
 	
@@ -34,7 +34,7 @@ public class Chatbot {
 		
 			this.nowDomainClassifier = new DomainClassifier();
 			this.weatherIntentClassifier = new WeatherIntentClassifier();
-			//this.foodIntentClassifier = new FoodIntentClassifier();
+			this.foodIntentClassifier = new FoodIntentClassifier();
 		
 		//=====Code Added for Assignment 3 (Language Understanding) Ends=====
 		
@@ -63,7 +63,7 @@ public class Chatbot {
 		if(!nowDomain.equals("Other")) {//in-domain message
 					
 			if(nowDomain.equals("Food")) {//Food domain
-				//nowIntent = foodIntentClassifier.getLabel(nowInputText);
+				nowIntent = foodIntentClassifier.getLabel(nowInputText);
 			}else if(nowDomain.equals("Weather")) {//Weather domain
 				nowIntent = weatherIntentClassifier.getLabel(nowInputText);
 			}else {//this shouldn't happen

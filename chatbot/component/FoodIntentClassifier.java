@@ -7,11 +7,11 @@
 
 package chatbot.component;
 
-public class WeatherIntentClassifier {
+public class FoodIntentClassifier {
 	
 	private static String[] intentDictionary;
 	
-	public WeatherIntentClassifier() {
+	public FoodIntentClassifier() {
 		initializeIntentDictionary();
 	}
 	
@@ -19,7 +19,7 @@ public class WeatherIntentClassifier {
 	 * Create a dictionary of intents (under Weather domain)  
 	 */
 	private void initializeIntentDictionary() {
-		intentDictionary = new String[]{"WeatherReport", "Snow", "Rain"};
+		intentDictionary = new String[]{"FindFood", "OrderFood", "PayForFood"};
 		
 		System.out.print("Intents: (");
 		for(int i=0;i<intentDictionary.length;i++) {
@@ -59,37 +59,36 @@ public class WeatherIntentClassifier {
 		//	scoreArray[i] = Math.random();
 		//}
 		
+		String[] findFoodDictionary = new String[] {"find", "food", "search", "options", "want", "nearest", "restaurant"};
 		String[] tokenList1 = nowInputText.trim().toLowerCase().split("\\W");
-		
-		String[] intentDictionary = new String[] {"forecast", "weather", "report"};
-		for (String intentKeyword: intentDictionary) {
+		for (String intentKeyword: findFoodDictionary) {
 			for(int i = 0; i < tokenList1.length; i++) {
-				//Ji's edit: removed indexOf(), instead compared the values of each input keyword and weather keyword 
+				//Ji's edit: removed indexOf(), instead compared the values of each input keyword and intent keyword 
 				if(tokenList1[i].compareTo(intentKeyword) == 0) { 
-					//{"Other", "Weather", "Food"}, so scoreArray[1] indicates the score for Weather domain
+					//scoreArray[0] indicates the score for FindFood intent
 					scoreArray[0] = scoreArray[0].doubleValue()+1.0;
 				}
 			
 			}
 		}
 		
-		String[] snowDictionary = new String[] {"snow", "winter", "freezing", "weather", "report", "forecast", "cold"};
+		String[] orderFoodDictionary = new String[] {"order", "food", "want", "add", "online", "get"};
 		String[] tokenList2 = nowInputText.trim().toLowerCase().split("\\W");
-		for(String snowKeyword: snowDictionary) {
+		for(String snowKeyword: orderFoodDictionary) {
 			for(int j = 0; j < tokenList2.length; j++) {
-				//Ji's edit: removed indexOf(), instead compared the values of each input keyword and food keyword
 				if(tokenList2[j].compareTo(snowKeyword) == 0) {
-					//{"Other", "Weather", "Food"}, so scoreArray[2] indicates the score for Food domain
+					//scoreArray[1] indicates the score for OrderFood intent
 					scoreArray[1] = scoreArray[1].doubleValue()+1.0;
 				}
 			}
 		}
 		
-		String[] rainDictionary = new String[] {"weather", "drizzling", "report", "forecast", "rain", "rainy", "wet"};
+		String[] payFoodDictionary = new String[] {"food", "price", "how", "much", "payment", "pay"};
 		String[] tokenList3 = nowInputText.trim().toLowerCase().split("\\W");
-		for(String rainKeyword: rainDictionary) {
+		for(String rainKeyword: payFoodDictionary) {
 			for(String token: tokenList3) {
 				if(token.compareTo(rainKeyword) == 0) {
+					//scoreArray[2] indicates the score for PayForFood intent
 					scoreArray[2] = scoreArray[2].doubleValue()+1.0;
 				}
 			}
