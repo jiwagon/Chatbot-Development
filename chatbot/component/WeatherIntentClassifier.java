@@ -61,12 +61,12 @@ public class WeatherIntentClassifier {
 		
 		String[] tokenList1 = nowInputText.trim().toLowerCase().split("\\W");
 		
-		String[] intentDictionary = new String[] {"forecast", "weather", "report"};
-		for (String intentKeyword: intentDictionary) {
+		String[] weatherRepDictionary = new String[] {"forecast", "weather", "report"};
+		for (String intentKeyword: weatherRepDictionary) {
 			for(int i = 0; i < tokenList1.length; i++) {
-				//Ji's edit: removed indexOf(), instead compared the values of each input keyword and weather keyword 
+				//compare the values of each input keyword and intent keyword 
 				if(tokenList1[i].compareTo(intentKeyword) == 0) { 
-					//{"Other", "Weather", "Food"}, so scoreArray[1] indicates the score for Weather domain
+					//scoreArray[0] indicates the score for Weather Report intent
 					scoreArray[0] = scoreArray[0].doubleValue()+1.0;
 				}
 			
@@ -77,9 +77,8 @@ public class WeatherIntentClassifier {
 		String[] tokenList2 = nowInputText.trim().toLowerCase().split("\\W");
 		for(String snowKeyword: snowDictionary) {
 			for(int j = 0; j < tokenList2.length; j++) {
-				//Ji's edit: removed indexOf(), instead compared the values of each input keyword and food keyword
 				if(tokenList2[j].compareTo(snowKeyword) == 0) {
-					//{"Other", "Weather", "Food"}, so scoreArray[2] indicates the score for Food domain
+					//scoreArray[1] indicates the score for Snow intent
 					scoreArray[1] = scoreArray[1].doubleValue()+1.0;
 				}
 			}
@@ -90,6 +89,7 @@ public class WeatherIntentClassifier {
 		for(String rainKeyword: rainDictionary) {
 			for(String token: tokenList3) {
 				if(token.compareTo(rainKeyword) == 0) {
+					//scoreArray[2] indicates the score for Rain intent
 					scoreArray[2] = scoreArray[2].doubleValue()+1.0;
 				}
 			}

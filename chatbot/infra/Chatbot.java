@@ -1,9 +1,5 @@
 package chatbot.infra;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-
 import chatbot.component.DomainClassifier;
 import chatbot.component.WeatherIntentClassifier;
 import chatbot.component.FoodIntentClassifier;

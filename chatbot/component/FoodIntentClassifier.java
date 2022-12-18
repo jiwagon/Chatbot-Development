@@ -59,7 +59,7 @@ public class FoodIntentClassifier {
 		//	scoreArray[i] = Math.random();
 		//}
 		
-		String[] findFoodDictionary = new String[] {"find", "food", "options", "hungry", "eat"};
+		String[] findFoodDictionary = new String[] {"find", "food", "options", "hungry", "eat", "restaurants"};
 		String[] tokenList1 = nowInputText.trim().toLowerCase().split("\\W");
 		for (String intentKeyword: findFoodDictionary) {
 			for(int i = 0; i < tokenList1.length; i++) {

@@ -7,8 +7,6 @@
 
 package chatbot.component;
 
-import java.util.Arrays;
-
 public class DomainClassifier {
 	
 	private static String[] domainDictionary;
@@ -106,7 +104,6 @@ public class DomainClassifier {
 		return scoreArray;
 	}
 	
-
 
 	/**
 	 * Input:
