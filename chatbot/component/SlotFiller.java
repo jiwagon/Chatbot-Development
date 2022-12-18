@@ -29,14 +29,16 @@ public class SlotFiller {
 		
 		//-------------- Modify Code Here (Assignment 4) Begins ---------------
 		
-		Pattern nowPattern = Pattern.compile("\\b\\w+@PSU\\.EDU\\b");
-	    Matcher nowMatcher = nowPattern.matcher(nowInputText.trim().toUpperCase());
-	    while (nowMatcher.find()) {
-	    	String nowMatchedSubstring = nowMatcher.group();
-	    	System.out.println("PSU Email found: " + nowMatchedSubstring);
-	    	//adding value to the result hash table
-			result.put("Email", nowMatchedSubstring);
-	  	}
+		String[] nowInputWords = nowInputText.trim().toUpperCase().split("[\\s]+");
+		String[] cityList = new String[] {"LA", "NEW YORK CITY", "STATE COLLEGE","NYC", "LAS VEGAS"};
+		for(String nowCity: cityList) {
+			String[] nowCityWords = nowCity.trim().toUpperCase().split("[\\s]+");
+			//findPhrase() is our own method, see below
+			if(findPhrase(nowCityWords, nowInputWords)){
+				//adding value to the result hash table
+				result.put("CitiName", nowCity);
+			}
+		}
 		
 		
 		//modify the following code to implement your own slot extractor
@@ -57,11 +59,46 @@ public class SlotFiller {
 			}
 		}
 		
-		//-------------- Modify Code Here (Assignment 4) Ends ---------------
+		String[] patternArray = {"\\b\\w+\\s(PM|AM)\\b", "\\b\\s\\w+\\s(PM|AM)\\b"
+				, "\\b\\w+(PM|AM)\\b", "([01]?[0-9]|2[0-3]):[0-5][0-9]"};		
 		
+		for(String nowPatternStr: patternArray) {
+			Pattern nowPattern = Pattern.compile(nowPatternStr);
+		//Pattern nowPattern = Pattern.compile("\\b\\w+\\s(PM|AM)\\b");
+			    Matcher nowMatcher = nowPattern.matcher(nowInputText.trim().toUpperCase());
+			    while (nowMatcher.find()) {
+			    	String nowMatchedSubstring = nowMatcher.group();
+			    	//adding value to the result hash table
+					result.put("TimeOfTheDay", nowMatchedSubstring);
+			  	}
+			//-------------- Modify Code Here (Assignment 4) Ends ---------------
+			//}
 		//return the result hash table. You do not need to change this part of code.
+		}
 		return result;
 		
+	}
+	
+	private boolean findPhrase(String[] nowLocationWords, String[] nowInputWords) {
+		
+		//iterate through each word in the sentence
+		for(int i=0;i<nowInputWords.length;i++) {
+			//allWordsMatchStartsWith() is our own method, see below
+			if(allWordsMatchStartsWith(nowLocationWords, nowInputWords, i)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean allWordsMatchStartsWith(String[] nowLocationWords, String[] nowInputWords, int index) {
+		// TODO Auto-generated method stub
+		for(int i=0;i<nowLocationWords.length;i++) {
+			if(!nowLocationWords[i].equals(nowInputWords[index+i])) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
