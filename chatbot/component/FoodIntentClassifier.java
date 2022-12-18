@@ -59,7 +59,7 @@ public class FoodIntentClassifier {
 		//	scoreArray[i] = Math.random();
 		//}
 		
-		String[] findFoodDictionary = new String[] {"find", "food", "search", "options", "want", "nearest", "restaurant"};
+		String[] findFoodDictionary = new String[] {"find", "food", "options", "hungry", "eat"};
 		String[] tokenList1 = nowInputText.trim().toLowerCase().split("\\W");
 		for (String intentKeyword: findFoodDictionary) {
 			for(int i = 0; i < tokenList1.length; i++) {
@@ -72,7 +72,7 @@ public class FoodIntentClassifier {
 			}
 		}
 		
-		String[] orderFoodDictionary = new String[] {"order", "food", "want", "add", "online", "get"};
+		String[] orderFoodDictionary = new String[] {"order", "food", "add", "online", "get"};
 		String[] tokenList2 = nowInputText.trim().toLowerCase().split("\\W");
 		for(String snowKeyword: orderFoodDictionary) {
 			for(int j = 0; j < tokenList2.length; j++) {
@@ -83,7 +83,7 @@ public class FoodIntentClassifier {
 			}
 		}
 		
-		String[] payFoodDictionary = new String[] {"food", "price", "how", "much", "payment", "pay"};
+		String[] payFoodDictionary = new String[] {"food", "price", "how", "much", "pay", "total"};
 		String[] tokenList3 = nowInputText.trim().toLowerCase().split("\\W");
 		for(String rainKeyword: payFoodDictionary) {
 			for(String token: tokenList3) {

@@ -78,7 +78,7 @@ public class DomainClassifier {
 		}
 		
 		//Count key words in a small Food dictionary
-		String[] foodDictionary = new String[] {"food", "eat", "hungry"};
+		String[] foodDictionary = new String[] {"food", "eat", "hungry", "restaurant"};
 		for(String foodKeyword: foodDictionary) {
 			for(int j = 0; j < inputWord.length; j++) {
 				//Ji's edit: removed indexOf(), instead compared the values of each input keyword and food keyword
