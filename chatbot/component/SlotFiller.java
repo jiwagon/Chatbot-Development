@@ -33,7 +33,6 @@ public class SlotFiller {
 		String[] cityList = new String[] {"LA", "NEW YORK CITY", "STATE COLLEGE","NYC", "LAS VEGAS"};
 		for(String nowCity: cityList) {
 			String[] nowCityWords = nowCity.trim().toUpperCase().split("[\\s]+");
-			//findPhrase() is our own method, see below
 			if(findPhrase(nowCityWords, nowInputWords)){
 				//adding value to the result hash table
 				result.put("CitiName", nowCity);
@@ -79,25 +78,25 @@ public class SlotFiller {
 		
 	}
 	
-	private boolean findPhrase(String[] nowLocationWords, String[] nowInputWords) {
+	private boolean findPhrase(String[] nowCityWords, String[] nowInputWords) {
 		
 		//iterate through each word in the sentence
-		for(int i=0;i<nowInputWords.length;i++) {
-			//allWordsMatchStartsWith() is our own method, see below
-			if(allWordsMatchStartsWith(nowLocationWords, nowInputWords, i)) {
+		for(int i = 0; i < nowInputWords.length;i++) {
+			if(allWordsMatchStartsWith(nowCityWords, nowInputWords, i)) {
 				return true;
 			}
 		}
 		return false;
 	}
 	
-	private boolean allWordsMatchStartsWith(String[] nowLocationWords, String[] nowInputWords, int index) {
-		// TODO Auto-generated method stub
-		for(int i=0;i<nowLocationWords.length;i++) {
-			if(!nowLocationWords[i].equals(nowInputWords[index+i])) {
+	private boolean allWordsMatchStartsWith(String[] nowCityWords, String[] nowInputWords, int index) {
+		for(int i = 0; i < nowCityWords.length;i++) {
+			//If strings in nowInputWords doesn't match with strings in nowCityWords, function returns false
+			if(!nowCityWords[i].equals(nowInputWords[index+i])) {
 				return false;
 			}
 		}
+		//if all strings matched, then function returns true
 		return true;
 	}
 
