@@ -20,6 +20,7 @@ public class WeatherIntentClassifier {
 	 */
 	private void initializeIntentDictionary() {
 		intentDictionary = new String[]{"WeatherReport", "Snow", "Rain"};
+		
 		System.out.print("Intents: (");
 		for(int i=0;i<intentDictionary.length;i++) {
 			System.out.print(intentDictionary[i]);
@@ -53,8 +54,45 @@ public class WeatherIntentClassifier {
 		
 		//The following is the part you need to modify. 
 		//This current version just assign random values to each intent.
-		for(int i=0;i<scoreArray.length;i++) {
-			scoreArray[i] = Math.random();
+
+//		for(int i=0;i<scoreArray.length;i++) {
+//			scoreArray[i] = Math.random();
+//		}
+		
+		String[] tokenList1 = nowInputText.trim().toLowerCase().split("\\W");
+		
+		String[] intentDictionary = new String[] {"forecast", "weather", "report"};
+		for (String intentKeyword: intentDictionary) {
+			for(int i = 0; i < tokenList1.length; i++) {
+				//Ji's edit: removed indexOf(), instead compared the values of each input keyword and weather keyword 
+				if(tokenList1[i].compareTo(intentKeyword) == 0) { 
+					//{"Other", "Weather", "Food"}, so scoreArray[1] indicates the score for Weather domain
+					scoreArray[0] = scoreArray[0].doubleValue()+1.0;
+				}
+			
+			}
+		}
+		
+		String[] snowDictionary = new String[] {"snow", "winter", "freezing", "weather", "report", "forecast", "cold"};
+		String[] tokenList2 = nowInputText.trim().toLowerCase().split("\\W");
+		for(String snowKeyword: snowDictionary) {
+			for(int j = 0; j < tokenList2.length; j++) {
+				//Ji's edit: removed indexOf(), instead compared the values of each input keyword and food keyword
+				if(tokenList2[j].compareTo(snowKeyword) == 0) {
+					//{"Other", "Weather", "Food"}, so scoreArray[2] indicates the score for Food domain
+					scoreArray[1] = scoreArray[1].doubleValue()+1.0;
+				}
+			}
+		}
+		
+		String[] rainDictionary = new String[] {"weather", "drizzling", "report", "forecast", "rain", "rainy", "wet"};
+		String[] tokenList3 = nowInputText.trim().toLowerCase().split("\\W");
+		for(String rainKeyword: rainDictionary) {
+			for(String token: tokenList3) {
+				if(token.compareTo(rainKeyword) == 0) {
+					scoreArray[2] = scoreArray[2].doubleValue()+1.0;
+				}
+			}
 		}
 		
 		//============= Please Modify Here (ends) =============== 

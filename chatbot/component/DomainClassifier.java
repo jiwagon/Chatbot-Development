@@ -61,10 +61,10 @@ public class DomainClassifier {
 		//============= Please Modify Here (begins) =============== 
 		
 		//Count key words in a small Weather dictionary
-		String[] weatherDictionary = new String[] {"snow", "rain", "weather"};
+		String[] weatherDictionary = new String[] {"snow", "rain", "weather", "outside"};
 		
 		//Ji edit: Added tokenization by splitting the text into individual words 
-		String[] inputWord = nowInputText.toLowerCase().split("\\s");
+		String[] inputWord = nowInputText.trim().toLowerCase().split("\\W");
 		
 	
 		for (String weatherKeyword: weatherDictionary) {

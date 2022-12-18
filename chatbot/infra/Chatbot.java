@@ -59,7 +59,7 @@ public class Chatbot {
 		System.out.println("Domain: "+nowDomain);
 		String nowIntent = "";
 		
-		// Logic: if domain is not "Other", it will point to weather  or food 
+		// Logic: if domain is not "Other", it will point to weather or food 
 		if(!nowDomain.equals("Other")) {//in-domain message
 					
 			if(nowDomain.equals("Food")) {//Food domain
