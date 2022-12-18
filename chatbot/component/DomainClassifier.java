@@ -7,6 +7,8 @@
 
 package chatbot.component;
 
+import java.util.Arrays;
+
 public class DomainClassifier {
 	
 	private static String[] domainDictionary;
@@ -60,19 +62,30 @@ public class DomainClassifier {
 		
 		//Count key words in a small Weather dictionary
 		String[] weatherDictionary = new String[] {"snow", "rain", "weather"};
-		for(String weatherKeyword: weatherDictionary) {
-			if(nowInputText.toLowerCase().indexOf(weatherKeyword)>=0) {
-				//{"Other", "Weather", "Food"}, so scoreArray[1] indicates the score for Weather domain
-				scoreArray[1] = scoreArray[1].doubleValue()+1.0;
+		
+		//Ji edit: Added tokenization by splitting the text into individual words 
+		String[] inputWord = nowInputText.toLowerCase().split("\\s");
+		
+	
+		for (String weatherKeyword: weatherDictionary) {
+			for(int i = 0; i < inputWord.length; i++) {
+				//Ji's edit: removed indexOf(), instead compared the values of each input keyword and weather keyword 
+				if(inputWord[i].compareTo(weatherKeyword) == 0) { 
+					//{"Other", "Weather", "Food"}, so scoreArray[1] indicates the score for Weather domain
+					scoreArray[1] = scoreArray[1].doubleValue()+1.0;
+				}
 			}
 		}
 		
 		//Count key words in a small Food dictionary
 		String[] foodDictionary = new String[] {"food", "eat", "hungry"};
 		for(String foodKeyword: foodDictionary) {
-			if(nowInputText.toLowerCase().indexOf(foodKeyword)>=0) {
-				//{"Other", "Weather", "Food"}, so scoreArray[2] indicates the score for Food domain
-				scoreArray[2] = scoreArray[2].doubleValue()+1.0;
+			for(int j = 0; j < inputWord.length; j++) {
+				//Ji's edit: removed indexOf(), instead compared the values of each input keyword and food keyword
+				if(inputWord[j].compareTo(foodKeyword) == 0) {
+					//{"Other", "Weather", "Food"}, so scoreArray[2] indicates the score for Food domain
+					scoreArray[2] = scoreArray[2].doubleValue()+1.0;
+				}
 			}
 		}
 		
@@ -93,7 +106,8 @@ public class DomainClassifier {
 		return scoreArray;
 	}
 	
-	
+
+
 	/**
 	 * Input:
 	 * 	nowInputText: the message that the user sent to your chatbot
