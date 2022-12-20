@@ -35,6 +35,7 @@ public class DialogueManager {
 		System.out.println("------------ Dialogue Management Log ---------------------");
 		System.out.println("Dialogue State BEFORE Message: "+dialogueStateHistory.get(dialogueStateHistory.size()-1));
 		
+		// Not the most practical because irl need to store huge amount of conversation data
 		//keep track of domain, intent, slot values
 		domainHistory.add(nowDomain);
 		//System.out.println("Size of domainHistory: "+domainHistory.size());
@@ -47,7 +48,7 @@ public class DialogueManager {
 		//System.out.println("Size of intentHistory: "+intentHistory.size());
 		//}
 		
-		slotHistory.add(extractedSlotValues);
+		slotHistory.add(extractedSlotValues); //add into a hash table 
 		//System.out.println("Size of slotHistory: "+slotHistory.size());
 		
 		String nowNextStateLabel = calculateNextState(); 
@@ -63,7 +64,9 @@ public class DialogueManager {
 
 	/*
 	 * Task: Use all the information (including dialogueStateHistory, domainHistory,
-	 * intentHistory, and slotHistory) to decide the next dialogue state.  
+	 * intentHistory, and slotHistory) to decide the next dialogue state. 
+	 * 
+	 *  
 	 * 
 	 */
 	private String calculateNextState() {
@@ -86,7 +89,7 @@ public class DialogueManager {
 				}else {
 					return "ASK-LOCATION";
 				}
-			//break;
+				//break;
 	
 			case "Snow":
 				if(hasSlotValue("Location")) {
@@ -112,7 +115,7 @@ public class DialogueManager {
 					return "CHIT-CHAT";
 				}
 				return "GREETING";
-				
+			
 			case "FindFood":
 				if(hasSlotValue("Location")) {
 					if(hasSlotValue("FoodType")) {
