@@ -52,13 +52,6 @@ public class WeatherIntentClassifier {
 		
 		//============= Please Modify Here (begins) =============== 
 		
-		//The following is the part you need to modify. 
-		//This current version just assign random values to each intent.
-
-		//for(int i=0;i<scoreArray.length;i++) {
-		//	scoreArray[i] = Math.random();
-		//}
-		
 		String[] tokenList1 = nowInputText.trim().toLowerCase().split("\\W");
 		
 		String[] weatherRepDictionary = new String[] {"forecast", "weather", "report"};

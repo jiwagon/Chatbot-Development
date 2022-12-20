@@ -30,6 +30,17 @@ public class SlotFiller {
 		//-------------- Modify Code Here (Assignment 4) Begins ---------------
 		
 		String[] nowInputWords = nowInputText.trim().toUpperCase().split("[\\s]+");
+		
+		String[] urgentList = new String[] {"THIS IS URGENT", "HELP URGENTLY", "HELP IMMEDIATELY","NO TIME", "VERY SOON", 
+				"ASAP", "AS SOON AS POSSIBLE"};
+		for(String urgencyLvl: urgentList) {
+			String[] urgencyWords = urgencyLvl.trim().toUpperCase().split("[\\s]+");
+			if(findPhrase(urgencyWords, nowInputWords)){
+				//adding value to the result hash table
+				result.put("Urgency", "HIGH");
+			}
+		}
+		
 		String[] cityList = new String[] {"LA", "NEW YORK CITY", "STATE COLLEGE","NYC", "LAS VEGAS"};
 		for(String nowCity: cityList) {
 			String[] nowCityWords = nowCity.trim().toUpperCase().split("[\\s]+");
@@ -39,7 +50,7 @@ public class SlotFiller {
 			}
 		}
 		
-		String[] foodTypeList = new String[] {"PIZZA", "BURGER", "STEAK"};
+		String[] foodTypeList = new String[] {"PIZZA", "BURGER", "STEAK", "RAMEN", "PASTA"};
 		for(String nowFoodType: foodTypeList) {
 			if(nowInputText.toUpperCase().contains(nowFoodType)) {
 				//adding value to the result hash table
@@ -47,41 +58,51 @@ public class SlotFiller {
 			}
 		}
 		
-		//modify the following code to implement your own slot extractor
-		String[] dayOfWeekList = new String[] {"FRIDAY", "MONDAY", "SATURDAY", "SUNDAY", "THURSDAY", "TUESDAY", "WEDNESDAY"};
-		for(String nowDayOfWeek: dayOfWeekList) {
-			if(nowInputText.toUpperCase().contains(nowDayOfWeek)) {
-				//adding value to the result hash table
-				result.put("DayOfWeek", nowDayOfWeek);
-			}
-		}
-		
-		//modify the following code to implement your own slot extractor
-		String[] nowRelativeList = new String[] {"TODAY", "TOMORROW", "YESTERDAY"};
+		//To detect urgency 
+		String[] nowRelativeList = new String[] {"TODAY", "TOMORROW", "YESTERDAY", "THE NEXT DAY", "TONIGHT", "THIS MORNING",
+				"THIS AFTERNOON", "THIS EVENING", "THIS NOON"};
 		for(String nowRelativeDate: nowRelativeList) {
-			if(nowInputText.toUpperCase().contains(nowRelativeDate)) {
+			String[] nowDate = nowRelativeDate.trim().toUpperCase().split("[\\s]+");
+			if(findPhrase(nowDate, nowInputWords)) {
 				//adding value to the result hash table
-				result.put("RelativeDate", nowRelativeDate);
+				result.put("RelativeUrgentTime", nowRelativeDate);
 			}
 		}
 		
-		String[] patternArray = {"\\b\\w+\\s(PM|AM)\\b", "\\b\\s\\w+\\s(PM|AM)\\b"
-				, "\\b\\w+(PM|AM)\\b", "([01]?[0-9]|2[0-3]):[0-5][0-9]"};		
+		String[] patternArray = {"\\b\\d+\\s(PM|AM)\\b", "\\b\\s\\d+\\s(PM|AM)\\b"
+				, "\\b\\d+(PM|AM)\\b", "([01]?[0-9]|2[0-3]):[0-5][0-9]"};		
 		
 		for(String nowPatternStr: patternArray) {
 			Pattern nowPattern = Pattern.compile(nowPatternStr);
-		//Pattern nowPattern = Pattern.compile("\\b\\w+\\s(PM|AM)\\b");
-			    Matcher nowMatcher = nowPattern.matcher(nowInputText.trim().toUpperCase());
-			    while (nowMatcher.find()) {
-			    	String nowMatchedSubstring = nowMatcher.group();
-			    	//adding value to the result hash table
-					result.put("TimeOfTheDay", nowMatchedSubstring);
-			  	}
-			//-------------- Modify Code Here (Assignment 4) Ends ---------------
-			//}
+			Matcher nowMatcher = nowPattern.matcher(nowInputText.trim().toUpperCase());
+			while (nowMatcher.find()) {
+				String nowMatchedSubstring = nowMatcher.group();
+			    //adding value to the result hash table
+				result.put("NewFlightTime", nowMatchedSubstring);
+			}
 		//return the result hash table. You do not need to change this part of code.
 		}
 		return result;
+		
+		/**
+		 * Yes/No Confirmation
+		 * Tried but does not work
+		 * String[] yesList = new String[] {"YES"};
+				for(String yesWord: yesList) {
+				if(nowInputText.toUpperCase().equals(yesWord)) {
+					//adding value to the result hash table
+					result.put("Yes", yesWord);
+				}
+			}
+			
+			String[] noList = new String[] {"NO"};
+			for(String noWord: noList) {
+				if(nowInputText.toUpperCase().contains(noWord)) {
+					//adding value to the result hash table
+					result.put("No", noWord);
+				}
+			}
+		 */
 		
 	}
 	

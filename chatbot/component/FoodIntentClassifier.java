@@ -19,7 +19,7 @@ public class FoodIntentClassifier {
 	 * Create a dictionary of intents (under Weather domain)  
 	 */
 	private void initializeIntentDictionary() {
-		intentDictionary = new String[]{"FindFood", "OrderFood", "PayForFood"};
+		intentDictionary = new String[]{"FindFood", "OrderFood", "Confirmation"};
 		
 		System.out.print("Intents: (");
 		for(int i=0;i<intentDictionary.length;i++) {
@@ -52,14 +52,7 @@ public class FoodIntentClassifier {
 		
 		//============= Please Modify Here (begins) =============== 
 		
-		//The following is the part you need to modify. 
-		//This current version just assign random values to each intent.
-
-		//for(int i=0;i<scoreArray.length;i++) {
-		//	scoreArray[i] = Math.random();
-		//}
-		
-		String[] findFoodDictionary = new String[] {"find", "food", "options", "hungry", "eat", "restaurants"};
+		String[] findFoodDictionary = new String[] {"find", "food", "options", "hungry", "eat", "restaurants", "restaurant"};
 		String[] tokenList1 = nowInputText.trim().toLowerCase().split("\\W");
 		for (String intentKeyword: findFoodDictionary) {
 			for(int i = 0; i < tokenList1.length; i++) {
@@ -72,7 +65,8 @@ public class FoodIntentClassifier {
 			}
 		}
 		
-		String[] orderFoodDictionary = new String[] {"order", "food", "add", "online", "get"};
+		String[] orderFoodDictionary = new String[] {"order", "food", "add", "online", "get", "snacks", 
+				"lunch", "dinner", "breakfast", "dessert", "drinks", "flight"};
 		String[] tokenList2 = nowInputText.trim().toLowerCase().split("\\W");
 		for(String snowKeyword: orderFoodDictionary) {
 			for(int j = 0; j < tokenList2.length; j++) {
@@ -83,18 +77,20 @@ public class FoodIntentClassifier {
 			}
 		}
 		
-		String[] payFoodDictionary = new String[] {"food", "price", "how", "much", "pay", "total"};
-		String[] tokenList3 = nowInputText.trim().toLowerCase().split("\\W");
-		for(String rainKeyword: payFoodDictionary) {
-			for(String token: tokenList3) {
-				if(token.compareTo(rainKeyword) == 0) {
-					//scoreArray[2] indicates the score for PayForFood intent
-					scoreArray[2] = scoreArray[2].doubleValue()+1.0;
+		/**
+		 * Yes/No Confirmation
+			String[] confirmationDictionary = new String[] {"yes", "no"};
+			String[] tokenList3 = nowInputText.trim().toLowerCase().split("\\W");
+			for(String confirmKeyword: confirmationDictionary) {
+				for(int j = 0; j < tokenList3.length; j++) {
+					if(tokenList3[j].compareTo(confirmKeyword) == 0) {
+						//scoreArray[2] indicates the score for confirmation intent
+						scoreArray[2] = scoreArray[2].doubleValue()+1.0;
+					}
 				}
 			}
-		}
+		*/
 		
-		//============= Please Modify Here (ends) =============== 
 		
 		//do not change the following lines
 		if(scoreArray.length!=intentDictionary.length) {

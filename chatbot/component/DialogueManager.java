@@ -26,8 +26,6 @@ public class DialogueManager {
 		
 		this.slotHistory = new ArrayList<Hashtable<String, String>>();
 		slotHistory.add(new Hashtable<String, String>());
-		
-		
 	}
 	
 	public String getNextState(String nowDomain, String nowIntent, Hashtable<String, String> extractedSlotValues) {
@@ -64,15 +62,11 @@ public class DialogueManager {
 
 	/*
 	 * Task: Use all the information (including dialogueStateHistory, domainHistory,
-	 * intentHistory, and slotHistory) to decide the next dialogue state. 
-	 * 
-	 *  
-	 * 
+	 * intentHistory, and slotHistory) to decide the next dialogue state.
 	 */
 	private String calculateNextState() {
 		
 		String latestState = dialogueStateHistory.get(dialogueStateHistory.size()-1);
-		
 		
 		String latestIntent = intentHistory.get(intentHistory.size()-1);
 		String latestDomain = domainHistory.get(domainHistory.size()-1);
@@ -114,8 +108,27 @@ public class DialogueManager {
 				if(dialogueStateHistory.size()>1) {
 					return "CHIT-CHAT";
 				}
-				return "GREETING";
+				return "FEELING-GREETING";
+				
+			// EMOTION DIALOGUE 
 			
+			case "Happy":
+				return "HAPPY-HELP-GREETING";
+				
+			case "Upset":
+				return "UPSET-HELP-GREETING";
+				
+			case "Angry":
+				return "ANGRY-HELP-GREETING";
+			
+				
+			case "OrderFood":
+				if (hasSlotValue("FoodType")) {
+					return "CONFIRMATION";
+				}else {
+					return "ASK-FOOD-TYPE-ONFLIGHT";
+				}
+				
 			case "FindFood":
 				if(hasSlotValue("Location")) {
 					if(hasSlotValue("FoodType")) {
@@ -127,6 +140,17 @@ public class DialogueManager {
 				}else {
 					return "ASK-LOCATION";
 				}
+				
+				/**
+				 * Yes/No Confirmation
+				 * case "Confirmation":
+					if (hasSlotValue("Yes")) {
+						return "YES-CONFIRMED";
+					}
+					else if (hasSlotValue("No")) {
+						return "NO-UNCONFIRMED";
+					}
+				 */
 			
 			default:
 				System.err.println("Invalid latestNonNullIntent: " + latestNonNullIntent);

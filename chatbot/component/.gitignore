@@ -2,3 +2,10 @@
 /WeatherIntentClassifier.class
 /FoodIntentClassifier.class
 /SlotFiller.class
+/DialogueManager.class
+/DialogueStateTable.class
+/Snippet.class
+/EmotionIntentClassifier.class
+/FoodIntentClassifier2.class
+/ServicesIntentClassifier.class
+/FlightIntentClassifier.class
