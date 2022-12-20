@@ -1,10 +1,3 @@
-/*
- * chatbot.component is added for Assignment 3 (Language Understanding)
- * 
- * DomainClassifier.java is added for Assignment 3 (Language
- * Understanding)
- */
-
 package chatbot.component;
 
 public class DomainClassifier {
@@ -21,7 +14,7 @@ public class DomainClassifier {
 	private void initializeDomainDictionary() {
 		
 		//list all the domains - orders matter 
-		domainDictionary = new String[]{"Other", "Weather", "Food", "Emotion", "Flight"};
+		domainDictionary = new String[]{"Other", "Weather", "Food"};
 		
 		//create the display string
 		System.out.print("Domains: (");
@@ -54,46 +47,34 @@ public class DomainClassifier {
 			scoreArray[i] = Double.valueOf(0.0);
 		}
 		
+		//The following is the part you need to modify.
 		
 		//============= Please Modify Here (begins) =============== 
 		
-		//Added tokenization by splitting the text into individual words 
-		String[] inputWord = nowInputText.trim().toLowerCase().split("\\W");
-				
-		
-		String[] emotionDictionary = new String[] {"feeling", "feel", "i'm", "im","am",
-				"happy", "sad", "alright", "amazing", "great", "meh", "bad", "fine", "good", "pissed",
-				"angry", "well", "unwell", "unsatisfied", "no","time", "upset"};
-		for (String emotionKeyword: emotionDictionary) {
-			for(int i = 0; i < inputWord.length; i++) {
-				//Compare the values of each input keyword and emotion keyword 
-				if(inputWord[i].compareTo(emotionKeyword) == 0) { 
-					//ScoreArray[1] indicates the score for Weather domain
-					scoreArray[3] = scoreArray[3].doubleValue()+1.0;
-				}
-			}
-		}
-		
 		//Count key words in a small Weather dictionary
-		String[] weatherDictionary = new String[] {"snow", "rain", "weather", "outside"};	
+		String[] weatherDictionary = new String[] {"snow", "rain", "weather", "outside"};
+		
+		//Ji edit: Added tokenization by splitting the text into individual words 
+		String[] inputWord = nowInputText.trim().toLowerCase().split("\\W");
+		
+	
 		for (String weatherKeyword: weatherDictionary) {
 			for(int i = 0; i < inputWord.length; i++) {
-				//Compared the values of each input keyword and weather keyword 
+				//Ji's edit: removed indexOf(), instead compared the values of each input keyword and weather keyword 
 				if(inputWord[i].compareTo(weatherKeyword) == 0) { 
-					//ScoreArray[1] indicates the score for Weather domain
+					//{"Other", "Weather", "Food"}, so scoreArray[1] indicates the score for Weather domain
 					scoreArray[1] = scoreArray[1].doubleValue()+1.0;
 				}
 			}
 		}
 		
 		//Count key words in a small Food dictionary
-		String[] foodDictionary = new String[] {"food", "eat", "hungry", "restaurant", "order", "find", "snacks", 
-				"lunch", "dinner", "breakfast", "dessert", "drinks", "add", "get", "purchase"};
+		String[] foodDictionary = new String[] {"food", "eat", "hungry", "restaurant"};
 		for(String foodKeyword: foodDictionary) {
 			for(int j = 0; j < inputWord.length; j++) {
-				//compare the values of each input keyword and food keyword
+				//Ji's edit: removed indexOf(), instead compared the values of each input keyword and food keyword
 				if(inputWord[j].compareTo(foodKeyword) == 0) {
-					//scoreArray[2] indicates the score for Food domain
+					//{"Other", "Weather", "Food"}, so scoreArray[2] indicates the score for Food domain
 					scoreArray[2] = scoreArray[2].doubleValue()+1.0;
 				}
 			}

@@ -9,7 +9,7 @@ public class EmotionIntentClassifier {
 	}
 	
 	/**
-	 * Create a dictionary of intents (under Emotions domain)  
+	 * Create a dictionary of intents (under Weather domain)  
 	 */
 	private void initializeIntentDictionary() {
 		intentDictionary = new String[]{"Happy", "Upset", "Angry"};
@@ -43,21 +43,30 @@ public class EmotionIntentClassifier {
 			scoreArray[i] = Double.valueOf(0.0);
 		}
 		
-		String[] happyDictionary = new String[] {"feeling", "feel", "happy", "awesome", "amazing", 
-				"good", "great", "well", "fine"};
+		//============= Please Modify Here (begins) =============== 
+		
+		//The following is the part you need to modify. 
+		//This current version just assign random values to each intent.
+
+		//for(int i=0;i<scoreArray.length;i++) {
+		//	scoreArray[i] = Math.random();
+		//}
+		
+		String[] happyDictionary = new String[] {"feeling", "feel", "i'm", "im","am",
+				"happy", "awesome", "amazing", "good", "great", "well", "fine"};
 		String[] tokenList1 = nowInputText.trim().toLowerCase().split("\\W");
 		for (String happyKeyword: happyDictionary) {
 			for(int i = 0; i < tokenList1.length; i++) {
-				//compare the values of each input keyword and intent keyword 
+				//Ji's edit: removed indexOf(), instead compared the values of each input keyword and intent keyword 
 				if(tokenList1[i].compareTo(happyKeyword) == 0) { 
-					//scoreArray[0] indicates the score for happy intent
+					//scoreArray[0] indicates the score for FindFood intent
 					scoreArray[0] = scoreArray[0].doubleValue()+1.0;
 				}
 			
 			}
 		}
 		
-		String[] upsetDictionary = new String[] {"feeling", "feel", "meh", "bad", "sad", "unwell", "disappointed", "upset"};
+		String[] upsetDictionary = new String[] {"feeling", "feel", "i'm", "im","am","meh", "bad", "sad", "unwell", "disappointed", "upset"};
 		String[] tokenList2 = nowInputText.trim().toLowerCase().split("\\W");
 		for(String upsetKeyword: upsetDictionary) {
 			for(int j = 0; j < tokenList2.length; j++) {
@@ -68,17 +77,18 @@ public class EmotionIntentClassifier {
 			}
 		}
 		
-		String[] angryDictionary = new String[] {"feeling", "feel", "angry", "impatient", "pissed", "unsatisfied", "annoyed", 
-				"no", "time", "frustrated", "irritated"};
+		String[] angryDictionary = new String[] {"feeling", "feel", "i'm", "im","am", "angry", "impatient", "pissed", "unsatisfied", "no", "time"};
 		String[] tokenList3 = nowInputText.trim().toLowerCase().split("\\W");
 		for(String angryKeyword: angryDictionary) {
 			for(String token: tokenList3) {
 				if(token.compareTo(angryKeyword) == 0) {
-					//scoreArray[2] indicates the score for angry intent
+					//scoreArray[2] indicates the score for PayForFood intent
 					scoreArray[2] = scoreArray[2].doubleValue()+1.0;
 				}
 			}
 		}
+		
+		//============= Please Modify Here (ends) =============== 
 		
 		//do not change the following lines
 		if(scoreArray.length!=intentDictionary.length) {

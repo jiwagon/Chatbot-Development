@@ -21,31 +21,15 @@ public class DialogueStateTable {
 			break;
 			
 			
-			case "FEELING-GREETING":
-				response = "Hello! How are you feeling today?";
+			case "GREETING":
+				response = "Hello! How can I help you?";
 			break;
 			
-			
-		 	case "HELP-GREETING":
+			/*
+		 	case "START-STATE":
 		 		response = "Hello! How can I help you?";
 		 	break;
-		 	
-		 	case "HAPPY-HELP-GREETING":
-		 		response = "Awesome! How can I help you?";
-		 	break;
-		 	
-		 	case "STRESS-RATING":
-		 		response = "Rate 1(Slightly) - 5(Extremely) how stressful was this issue for you?";
-		 	break;
-		 	
-		 	case "UPSET-HELP-GREETING":
-		 		response = "I hope I can better your day, how can I help?";
-		 	break;
-		 		
-		 	case "ANGRY-HELP-GREETING":
-		 		response = "I will try my best to help you out, please be patient with me! How can I help?";
-		 	break;
-		 		
+			*/
 		
 			//Dialogue States that are independent from domains/intents 
 		
@@ -69,14 +53,6 @@ public class DialogueStateTable {
             
             //Dialogue States in the Food domain
             
-        	case "PLACE-ORDER":
-        		response = "Order placed, you can pay on the flight. How else can I help?";
-        	break;
-        	
-        	case "ASK-FOOD-TYPE-ONFLIGHT":
-        		response = "What do you want to eat? We have Pizza, Burger, Steak, Ramen, and Pasta";
-        	break;
-        
         	case "ANSWER-FIND-FOOD":
         		response = "You can find food at [ANSWER-FIND-FOOD]";
             break;
@@ -85,15 +61,6 @@ public class DialogueStateTable {
         		response = "What do you want to eat?";
             break;
             
-        	case "CONFIRMATION":
-        		response = "I will place 1 order of your food. Reply Yes to confirm.";
-        	break;
-            
-            
-            /**
-          	case "ANSWER-ORDER-FOOD":
-        		response = "I will find some restaurants near you. Which area are you in?";
-            break;
             
         	case "ASK-LOCATION-ORDER-FOOD":
         		response = "Where do you want to order from?";
@@ -103,15 +70,10 @@ public class DialogueStateTable {
         		response = "I will find some restaurants near you. Which area are you in?";
             break;
             
-            //Yes/No Confirmation
-        	case "YES-CONFIRMED":
-        		response = "Confirmed. How else can I help you?";
-        	break;
-        		
-        	case "NO-UNCONFIRMED":
-        		response = "How else can I help you?";
-        	break;
-        	*/	
+        	case "ANSWER-ORDER-FOOD":
+        		response = "I will find some restaurants near you. Which area are you in?";
+            break;
+            
         	
         	default:
         		System.err.println("Invalid dialogueStateName: " + dialogueStateName);
