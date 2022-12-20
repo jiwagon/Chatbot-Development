@@ -35,10 +35,17 @@ public class SlotFiller {
 			String[] nowCityWords = nowCity.trim().toUpperCase().split("[\\s]+");
 			if(findPhrase(nowCityWords, nowInputWords)){
 				//adding value to the result hash table
-				result.put("CitiName", nowCity);
+				result.put("Location", nowCity);
 			}
 		}
 		
+		String[] foodTypeList = new String[] {"PIZZA", "BURGER", "STEAK"};
+		for(String nowFoodType: foodTypeList) {
+			if(nowInputText.toUpperCase().contains(nowFoodType)) {
+				//adding value to the result hash table
+				result.put("FoodType", nowFoodType);
+			}
+		}
 		
 		//modify the following code to implement your own slot extractor
 		String[] dayOfWeekList = new String[] {"FRIDAY", "MONDAY", "SATURDAY", "SUNDAY", "THURSDAY", "TUESDAY", "WEDNESDAY"};
@@ -50,8 +57,8 @@ public class SlotFiller {
 		}
 		
 		//modify the following code to implement your own slot extractor
-		String[] relativeDateList = new String[] {"TODAY", "TOMORROW", "YESTERDAY"};
-		for(String nowRelativeDate: relativeDateList) {
+		String[] nowRelativeList = new String[] {"TODAY", "TOMORROW", "YESTERDAY"};
+		for(String nowRelativeDate: nowRelativeList) {
 			if(nowInputText.toUpperCase().contains(nowRelativeDate)) {
 				//adding value to the result hash table
 				result.put("RelativeDate", nowRelativeDate);

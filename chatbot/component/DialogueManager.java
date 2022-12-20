@@ -72,11 +72,11 @@ public class DialogueManager {
 		
 		
 		String latestIntent = intentHistory.get(intentHistory.size()-1);
-		//String latestDomain = domainHistory.get(domainHistory.size()-1);
+		String latestDomain = domainHistory.get(domainHistory.size()-1);
 		
 		
 		String latestNonNullIntent = getLatestNonNullIntent();
-		//System.out.println("latestNonNullIntent: "+latestNonNullIntent);
+		System.out.println("latestNonNullIntent: "+latestNonNullIntent);
 				
 		switch (latestNonNullIntent) {
 		
